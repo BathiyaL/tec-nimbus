@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /petstore-api
+
+external:
+  pets-tore:
+    url: https://petstore.swagger.io/v2
