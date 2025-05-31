@@ -1,4 +1,4 @@
-package com.tecnimbus.petstore_api.rest.Model;
+package com.tecnimbus.petstore_api.Model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
