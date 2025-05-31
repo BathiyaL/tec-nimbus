@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pet {
-    private int id;
+    private Long id;
     private String name;
     private String status;
     private String[] photoUrls;

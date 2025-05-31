@@ -1,7 +1,10 @@
 server:
   servlet:
-    context-path: /petstore-api
+    context-path: /api/v1
 
 external:
   pets-tore:
     url: https://petstore.swagger.io/v2
+
+app:
+  data-mode: Remote
