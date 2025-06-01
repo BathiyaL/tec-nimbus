@@ -37,4 +37,18 @@ public class PetStoreExternalService extends BaseService {
         }
 
     }
+
+    public ResponseEntity<Pet> addNewPetToTheStore(Pet pet){
+        String remoteUrl = remotePetStore + "/pet";
+
+        HttpEntity<Pet> entity = new HttpEntity<>(pet, getHeaders());
+
+        ResponseEntity<Pet> response = restTemplate.exchange(
+                remoteUrl,
+                HttpMethod.POST,
+                entity,
+                Pet.class
+        );
+        return response;
+    }
 }

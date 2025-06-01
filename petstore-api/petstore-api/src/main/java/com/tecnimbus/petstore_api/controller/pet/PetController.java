@@ -18,4 +18,9 @@ public class PetController extends BaseController {
     public ResponseEntity<Pet> findPetById(@PathVariable Long petId) {
         return petService.findPetById(petId);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/pet")
+    public Pet addNewPet(@RequestBody Pet pet) {
+        return petService.AddNewPetToTheStore(pet);
+    }
 }

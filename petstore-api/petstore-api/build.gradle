@@ -28,6 +28,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok:1.18.34'
 	testCompileOnly 'org.projectlombok:lombok:1.18.34'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // JPA (Hibernate)
+	implementation 'com.h2database:h2:2.2.224'                                 // Embedded H2 DB
 }
 
 tasks.named('test') {
