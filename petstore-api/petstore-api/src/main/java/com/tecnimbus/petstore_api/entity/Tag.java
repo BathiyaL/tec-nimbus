@@ -1,9 +1,6 @@
-package com.tecnimbus.petstore_api.Model;
+package com.tecnimbus.petstore_api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Category {
+public class Tag {
     @Id
+    @Column(name = "tag_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;

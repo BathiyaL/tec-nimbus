@@ -6,19 +6,38 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFound(ResourceNotFoundException ex) {
-        Map<String, Object> error = new HashMap<>();
-        error.put("status", 404);
-        error.put("error", "Not Found");
-        error.put("message", ex.getMessage());
-        error.put("timestamp", LocalDateTime.now());
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        RestApiError err = new RestApiError(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND,
+                ex.getMessage(),
+                details);
+        return ResponseEntityBuilder.build(err);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgument(
+            IllegalArgumentException ex) {
+
+        List<String> details = new ArrayList<>();
+        details.add(ex.getMessage());
+
+        RestApiError err = new RestApiError(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                details);
+
+        return ResponseEntityBuilder.build(err);
     }
 }

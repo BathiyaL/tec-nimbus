@@ -1,6 +1,6 @@
 package com.tecnimbus.petstore_api.external;
 
-import com.tecnimbus.petstore_api.Model.Pet;
+import com.tecnimbus.petstore_api.entity.Pet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

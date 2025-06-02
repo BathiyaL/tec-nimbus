@@ -1,8 +1,10 @@
 package com.tecnimbus.petstore_api.controller.pet;
 
-import com.tecnimbus.petstore_api.Model.Pet;
+import com.tecnimbus.petstore_api.entity.Pet;
 import com.tecnimbus.petstore_api.controller.BaseController;
+import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.service.pet.PetService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class PetController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/pet")
-    public Pet addNewPet(@RequestBody Pet pet) {
+    public PetDTO addNewPet(@Valid @RequestBody PetDTO pet) {
         return petService.AddNewPetToTheStore(pet);
     }
 }

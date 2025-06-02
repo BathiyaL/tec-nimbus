@@ -1,4 +1,4 @@
-package com.tecnimbus.petstore_api.Model;
+package com.tecnimbus.petstore_api.entity;
 
 import java.io.Serializable;
 

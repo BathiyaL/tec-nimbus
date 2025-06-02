@@ -1,16 +1,15 @@
-package com.tecnimbus.petstore_api.Model;
+package com.tecnimbus.petstore_api.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "pet")
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +18,7 @@ public class Pet {
     private String status;
     //PhotoUrlArray photoUrls;
     //private Category category;
+    //@OneToMany(mappedBy = "id")
 //    @OneToMany(mappedBy = "id")
 //    private Tag[] tags;
 }

@@ -1,6 +1,6 @@
 package com.tecnimbus.petstore_api.service.external;
 
-import com.tecnimbus.petstore_api.Model.Pet;
+import com.tecnimbus.petstore_api.entity.Pet;
 import com.tecnimbus.petstore_api.constants.ExternalEndpoints;
 import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
 import com.tecnimbus.petstore_api.service.BaseService;
