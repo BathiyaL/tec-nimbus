@@ -9,11 +9,9 @@ import com.tecnimbus.petstore_api.service.BaseService;
 import com.tecnimbus.petstore_api.service.external.PetStoreExternalService;
 import com.tecnimbus.petstore_api.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PetService extends BaseService {
@@ -30,7 +28,7 @@ public class PetService extends BaseService {
     @Autowired
     PetRepository petRepository;
 
-    public ResponseEntity<Pet> findPetById(Long petId) {
+    public PetDTO findPetById(Long petId) {
         if (dataMode.equals("Remote")) {
             return petStoreExternalService.findPetById(petId);
         }
@@ -38,17 +36,22 @@ public class PetService extends BaseService {
     }
 
     public PetDTO AddNewPetToTheStore(PetDTO petDTO) {
-        Pet pet = petMapper.toEntity(petDTO);
-        pet.setId(null);
-        Pet savedPet = petRepository.save(pet);
+        if (dataMode.equals("Remote")) {
+            return petStoreExternalService.addNewPetToTheStore(petDTO);
+        }else if (dataMode.equals("Local")) {
+            Pet pet = petMapper.toEntity(petDTO);
+            pet.setId(null);
+            Pet savedPet = petRepository.save(pet);
 
-        ArrayList<TagDTO> savedTags = new ArrayList<>();
-        for (TagDTO tagDTO : petDTO.getTags()) {
-            savedTags.add(tagService.findOrCreateByName(tagDTO.getName()));
+            ArrayList<TagDTO> savedTags = new ArrayList<>();
+            for (TagDTO tagDTO : petDTO.getTags()) {
+                savedTags.add(tagService.findOrCreateByName(tagDTO.getName()));
+            }
+            PetDTO petDTOResponse = petMapper.toDto(savedPet);
+            petDTOResponse.setTags(savedTags);
+            return petDTOResponse;
         }
-        PetDTO petDTOResponse = petMapper.toDto(savedPet);
 
-        petDTOResponse.setTags(savedTags);
-        return petDTOResponse;
+        return null;
     }
 }

@@ -1,12 +1,14 @@
 package com.tecnimbus.petstore_api;
 
-import com.tecnimbus.petstore_api.external.PetStoreRemoteCalls;
+import com.tecnimbus.petstore_api.config.LoggingInterceptor;
 import com.tecnimbus.petstore_api.service.external.PetStoreExternalService;
 import com.tecnimbus.petstore_api.service.pet.PetService;
 import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.BufferingClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import java.sql.SQLException;
@@ -28,15 +30,16 @@ public class PetStoreApiApplication {
         SpringApplication.run(PetStoreApiApplication.class, args);
     }
 
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
 
     @Bean
-    public PetStoreRemoteCalls petStoreRemoteCalls() {
-        return new PetStoreRemoteCalls();
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate(
+                new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory())
+        );
+        restTemplate.getInterceptors().add(new LoggingInterceptor());
+        return restTemplate;
     }
+
 
     @Bean
     public PetService petService() {

@@ -1,8 +1,8 @@
 package com.tecnimbus.petstore_api.service.external;
 
-import com.tecnimbus.petstore_api.entity.Pet;
 import com.tecnimbus.petstore_api.constants.ExternalEndpoints;
 import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
+import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,13 +21,14 @@ public class PetStoreExternalService extends BaseService {
     @Value("${external.pet-store.url}")
     private String remotePetStore;
 
-    public ResponseEntity<Pet> findPetById(Long petId) {
+    public PetDTO findPetById(Long petId) {
         String remoteUrl = remotePetStore + ExternalEndpoints.FIND_PET_BY_ID_URL + petId;
         HttpEntity<Void> entity = new HttpEntity<>(getHeaders());
 
         try {
-            return restTemplate.exchange(
-                    remoteUrl, HttpMethod.GET, entity, Pet.class);
+            ResponseEntity<PetDTO> response = restTemplate.exchange(
+                    remoteUrl, HttpMethod.GET, entity, PetDTO.class);
+            return response.getBody();
         } catch (HttpClientErrorException.NotFound ex) {
             throw new ResourceNotFoundException("Pet not found in external API with id: " + petId);
         } catch (HttpClientErrorException ex) {
@@ -38,17 +39,17 @@ public class PetStoreExternalService extends BaseService {
 
     }
 
-    public ResponseEntity<Pet> addNewPetToTheStore(Pet pet){
+    public PetDTO addNewPetToTheStore(PetDTO petDTO){
         String remoteUrl = remotePetStore + "/pet";
 
-        HttpEntity<Pet> entity = new HttpEntity<>(pet, getHeaders());
+        HttpEntity<PetDTO> entity = new HttpEntity<>(petDTO, getHeaders());
 
-        ResponseEntity<Pet> response = restTemplate.exchange(
+        ResponseEntity<PetDTO> response = restTemplate.exchange(
                 remoteUrl,
                 HttpMethod.POST,
                 entity,
-                Pet.class
+                PetDTO.class
         );
-        return response;
+        return response.getBody();
     }
 }
