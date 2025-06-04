@@ -2,7 +2,7 @@ package com.tecnimbus.petstore_api;
 
 import com.tecnimbus.petstore_api.config.LoggingInterceptor;
 import com.tecnimbus.petstore_api.service.external.PetStoreExternalService;
-import com.tecnimbus.petstore_api.service.pet.PetService;
+import com.tecnimbus.petstore_api.service.pet.PetServiceRouter;
 import org.h2.tools.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -42,8 +42,8 @@ public class PetStoreApiApplication {
 
 
     @Bean
-    public PetService petService() {
-        return new PetService();
+    public PetServiceRouter petService() {
+        return new PetServiceRouter();
     }
 
     @Bean
