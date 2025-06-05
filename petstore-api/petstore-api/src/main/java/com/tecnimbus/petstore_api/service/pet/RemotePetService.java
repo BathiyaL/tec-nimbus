@@ -1,10 +1,7 @@
 package com.tecnimbus.petstore_api.service.pet;
 
-import com.tecnimbus.petstore_api.mapper.PetMapper;
 import com.tecnimbus.petstore_api.model.PetDTO;
-import com.tecnimbus.petstore_api.repository.pet.PetRepository;
 import com.tecnimbus.petstore_api.service.external.PetStoreExternalService;
-import com.tecnimbus.petstore_api.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +13,7 @@ public class RemotePetService implements PetServiceStrategy {
 
     @Override
     public PetDTO addNewPetToTheStore(PetDTO petDTO) {
-        return  null;
+        return  petStoreExternalService.addNewPetToTheStore(petDTO);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.tecnimbus.petstore_api.service.pet;
 
 import com.tecnimbus.petstore_api.entity.Pet;
+import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
 import com.tecnimbus.petstore_api.mapper.PetMapper;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.model.TagDTO;
@@ -38,6 +39,8 @@ public class LocalPetService implements PetServiceStrategy {
 
     @Override
     public PetDTO findPetById(Long petId) {
-        return null;
+        Pet pet = petRepository.findById(petId)
+                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + petId));
+        return petMapper.toDto(pet);
     }
 }

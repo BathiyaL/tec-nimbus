@@ -7,7 +7,7 @@ external:
     url: https://petstore.swagger.io/v2
 
 app:
-  data-mode: Local
+  data-mode: Remote
 
 spring:
   datasource:
