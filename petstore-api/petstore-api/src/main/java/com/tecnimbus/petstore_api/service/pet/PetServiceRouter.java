@@ -21,7 +21,7 @@ public class PetServiceRouter extends BaseService {
 
     public PetDTO findPetById(Long petId) {
         if (appConfig.getDataMode() == OperationMode.LOCAL) {
-            return null; // TODO
+            return localPetService.findPetById(petId);
         } else {
             return remotePetService.findPetById(petId);
         }
