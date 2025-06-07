@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,5 +22,5 @@ public class PetDTO {
     private String[] photoUrls;
     private Category category;
     @Valid
-    private ArrayList<TagDTO> tags;
+    private List<TagDTO> tags;
 }

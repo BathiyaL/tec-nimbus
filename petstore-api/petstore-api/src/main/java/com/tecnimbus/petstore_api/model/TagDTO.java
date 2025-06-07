@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TagDTO {
-    private int id;
+    private Long id;
     @NotBlank(message = "Tag name cannot be blank")
     private String name;
 }

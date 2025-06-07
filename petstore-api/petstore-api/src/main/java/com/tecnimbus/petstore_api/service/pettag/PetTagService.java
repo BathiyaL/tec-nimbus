@@ -3,6 +3,7 @@ package com.tecnimbus.petstore_api.service.pettag;
 import com.tecnimbus.petstore_api.entity.Pet;
 import com.tecnimbus.petstore_api.entity.PetTags;
 import com.tecnimbus.petstore_api.entity.Tag;
+import com.tecnimbus.petstore_api.model.TagDTO;
 import com.tecnimbus.petstore_api.repository.pettag.PetTagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,13 @@ public class PetTagService {
         return petTagRepository.findByPet(pet)
                 .stream()
                 .map(PetTags::getTag)
+                .toList();
+    }
+
+    public List<TagDTO> getTagDTOByPet(Pet pet) {
+        List<Tag> tags = getTagsByPet(pet);
+        return tags.stream()
+                .map(tag -> new TagDTO(tag.getId(), tag.getName()))
                 .toList();
     }
 

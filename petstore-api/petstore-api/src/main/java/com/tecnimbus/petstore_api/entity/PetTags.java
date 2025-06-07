@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PetTags {
     @Id
     @ManyToOne
-    @JoinColumn(name = "test_id")
+    @JoinColumn(name = "id")
     private Pet pet;
 
     @Id

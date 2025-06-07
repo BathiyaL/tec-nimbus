@@ -1,16 +1,20 @@
 package com.tecnimbus.petstore_api.service.pet;
 
 import com.tecnimbus.petstore_api.entity.Pet;
+import com.tecnimbus.petstore_api.entity.PetTags;
+import com.tecnimbus.petstore_api.entity.Tag;
 import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
 import com.tecnimbus.petstore_api.mapper.PetMapper;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.model.TagDTO;
 import com.tecnimbus.petstore_api.repository.pet.PetRepository;
+import com.tecnimbus.petstore_api.service.pettag.PetTagService;
 import com.tecnimbus.petstore_api.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class LocalPetService implements PetServiceStrategy {
@@ -22,6 +26,9 @@ public class LocalPetService implements PetServiceStrategy {
     @Autowired
     PetRepository petRepository;
 
+    @Autowired
+    PetTagService petTagService;
+
     @Override
     public PetDTO addNewPetToTheStore(PetDTO petDTO) {
         Pet pet = petMapper.toEntity(petDTO);
@@ -32,6 +39,7 @@ public class LocalPetService implements PetServiceStrategy {
         for (TagDTO tagDTO : petDTO.getTags()) {
             savedTags.add(tagService.findOrCreateByName(tagDTO.getName()));
         }
+        // TODO : save PetTAG
         PetDTO petDTOResponse = petMapper.toDto(savedPet);
         petDTOResponse.setTags(savedTags);
         return petDTOResponse;
@@ -41,6 +49,9 @@ public class LocalPetService implements PetServiceStrategy {
     public PetDTO findPetById(Long petId) {
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + petId));
-        return petMapper.toDto(pet);
+        PetDTO petDTO = petMapper.toDto(pet);
+        List<TagDTO> petTags = petTagService.getTagDTOByPet(pet);
+        petDTO.setTags(petTags);
+        return petDTO;
     }
 }
