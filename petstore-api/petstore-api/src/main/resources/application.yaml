@@ -11,7 +11,10 @@ app:
 
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost:9092/~/petdb
+#    url: jdbc:h2:tcp://localhost:9092/~/petdb
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:petdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:file:~/petdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password:

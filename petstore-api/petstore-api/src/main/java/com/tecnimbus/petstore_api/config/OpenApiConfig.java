@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenApiConfig {
-
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -16,7 +15,6 @@ public class OpenApiConfig {
                         .title("Pet Store API")
                         .version("v1")
                         .description("API for managing pets")
-                        .contact(new Contact().name("Your Name").email("you@example.com"))
-                );
+                        .contact(new Contact().name("Your Name").email("you@example.com")));
     }
 }
