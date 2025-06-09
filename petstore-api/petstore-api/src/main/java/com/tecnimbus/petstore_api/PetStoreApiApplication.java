@@ -20,12 +20,12 @@ public class PetStoreApiApplication {
     public static void main(String[] args) throws SQLException {
 
         // Starts H2 server to allow external clients like DBeaver
-        Server.createTcpServer(
-                "-tcp",
-                "-tcpAllowOthers",
-                "-tcpPort", "9092",
-                "-ifNotExists"
-        ).start();
+//        Server.createTcpServer(
+//                "-tcp",
+//                "-tcpAllowOthers",
+//                "-tcpPort", "9092",
+//                "-ifNotExists"
+//        ).start();
 
         SpringApplication.run(PetStoreApiApplication.class, args);
     }
