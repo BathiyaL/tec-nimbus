@@ -37,15 +37,9 @@ dependencies {
 	implementation("org.apache.commons:commons-lang3:3.0")
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
-//	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
-//	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.14'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.7.0'
 
-
-	//open api code generation
-	//swaggerCodegen 'org.openapitools:openapi-generator-cli:7.3.0'
-	implementation 'io.swagger.core.v3:swagger-annotations:2.2.20'
 
 }
 
