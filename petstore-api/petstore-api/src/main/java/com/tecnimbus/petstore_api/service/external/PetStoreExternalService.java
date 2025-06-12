@@ -52,4 +52,10 @@ public class PetStoreExternalService extends BaseService {
         );
         return response.getBody();
     }
+
+    public PetDTO updateAnExistingPet(PetDTO petDTO){
+        // TODO
+        return null;
+    }
+
 }

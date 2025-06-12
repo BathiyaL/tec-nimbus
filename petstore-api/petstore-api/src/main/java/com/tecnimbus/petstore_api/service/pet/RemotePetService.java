@@ -21,11 +21,16 @@ public class RemotePetService implements PetServiceStrategy {
 
     @Override
     public PetDTO addNewPetToTheStore(PetDTO petDTO) {
-        return  null;
+            return petStoreExternalService.addNewPetToTheStore(petDTO);
     }
 
     @Override
     public PetDTO findPetById(Long petId) {
         return petStoreExternalService.findPetById(petId);
+    }
+
+    @Override
+    public PetDTO updateAnExistingPet(PetDTO petDTO) {
+        return null;
     }
 }

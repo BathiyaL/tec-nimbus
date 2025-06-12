@@ -47,4 +47,10 @@ public class LocalPetService implements PetServiceStrategy {
         petDTO.setTags(petTags);
         return petDTO;
     }
+
+    @Override
+    public PetDTO updateAnExistingPet(PetDTO petDTO)  {
+        // TODO:
+        return null;
+    }
 }
