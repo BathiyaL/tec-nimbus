@@ -37,9 +37,9 @@ public class PetServiceRouter extends BaseService {
 
     public PetDTO updateAnExistingPet(PetDTO petDTO) {
         if (appConfig.getDataMode() == OperationMode.LOCAL) {
-            return localPetService.addNewPetToTheStore(petDTO);
+            return localPetService.updateAnExistingPet(petDTO);
         } else {
-            return remotePetService.addNewPetToTheStore(petDTO);
+            return remotePetService.updateAnExistingPet(petDTO);
         }
     }
 }

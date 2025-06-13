@@ -36,7 +36,7 @@ public class PetController extends BaseController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/pet")
     public ResponseEntity<PetDTO> updatePet(@Valid @RequestBody PetDTO petDTO) {
-        PetDTO saved = petServiceRouter.addNewPetToTheStore(petDTO);
+        PetDTO saved = petServiceRouter.updateAnExistingPet(petDTO);
         return ResponseEntity.ok(saved);
     }
 }
