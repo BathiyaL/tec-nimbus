@@ -50,7 +50,11 @@ public class LocalPetService implements PetServiceStrategy {
 
     @Override
     public PetDTO updateAnExistingPet(PetDTO petDTO)  {
-        // TODO:
-        return null;
+        Pet existingPet = petRepository.findById(petDTO.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id " + petDTO.getId()));
+        existingPet.setName(petDTO.getName());
+        existingPet.setStatus(petDTO.getStatus());
+        Pet updatedPet = petRepository.save(existingPet);
+        return petMapper.toDto(updatedPet);
     }
 }

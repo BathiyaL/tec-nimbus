@@ -15,7 +15,7 @@ public class HealthController extends BaseController{
         if (RETRYING_COUNT < 8 ){
             return ResponseEntity
                     .status(HttpStatus.SERVICE_UNAVAILABLE)
-                    .body("Service Unavailable - Maintenance Mode");
+                    .body("Service Unavailable - Maintenance Mode"); // Just for test simulation
         } else {
             return ResponseEntity.ok("{\"status\":\"UP\"}");
         }

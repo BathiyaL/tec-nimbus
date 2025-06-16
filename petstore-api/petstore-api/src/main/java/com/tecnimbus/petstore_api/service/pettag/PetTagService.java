@@ -4,6 +4,7 @@ import com.tecnimbus.petstore_api.entity.Pet;
 import com.tecnimbus.petstore_api.entity.PetTags;
 import com.tecnimbus.petstore_api.entity.Tag;
 import com.tecnimbus.petstore_api.mapper.TagMapper;
+import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.model.TagDTO;
 import com.tecnimbus.petstore_api.repository.pettag.PetTagsRepository;
 import com.tecnimbus.petstore_api.service.BaseService;
