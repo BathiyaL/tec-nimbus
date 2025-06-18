@@ -55,6 +55,10 @@ public class LocalPetService implements PetServiceStrategy {
         existingPet.setName(petDTO.getName());
         existingPet.setStatus(petDTO.getStatus());
         Pet updatedPet = petRepository.save(existingPet);
-        return petMapper.toDto(updatedPet);
+
+        List<TagDTO> savedTags = petTagService.savePetTagsIfNotExists(existingPet, petDTO.getTags());
+        PetDTO petDTOResponse = petMapper.toDto(updatedPet);
+        petDTOResponse.setTags(savedTags);
+        return petDTOResponse;
     }
 }
