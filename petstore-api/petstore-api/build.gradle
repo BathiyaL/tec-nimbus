@@ -43,6 +43,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 
+	testImplementation 'org.wiremock:wiremock-standalone:3.3.1'
+
+
+
 }
 
 tasks.named('test') {
