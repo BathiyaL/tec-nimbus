@@ -12,7 +12,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("test")
+@ActiveProfiles("test-wiremock")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DisplayName("Pet API Integration Test with WireMock")
 public class PetControllerIntegrationTest {
