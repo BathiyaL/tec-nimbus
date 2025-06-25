@@ -39,4 +39,10 @@ public class PetController extends BaseController {
         PetDTO saved = petServiceRouter.updateAnExistingPet(petDTO);
         return ResponseEntity.ok(saved);
     }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/pet/{petId}")
+    public void deletePet(@PathVariable Long petId) {
+        petServiceRouter.deleteAnExistingPet(petId);
+        //return ResponseEntity.ok(saved);
+    }
 }

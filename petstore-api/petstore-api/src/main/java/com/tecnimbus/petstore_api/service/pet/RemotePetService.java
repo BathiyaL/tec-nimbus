@@ -33,4 +33,9 @@ public class RemotePetService implements PetServiceStrategy {
     public PetDTO updateAnExistingPet(PetDTO petDTO) {
         return petStoreExternalService.updateAnExistingPet(petDTO);
     }
+
+    @Override
+    public void deleteAnExistingPet(Long petId) {
+
+    }
 }

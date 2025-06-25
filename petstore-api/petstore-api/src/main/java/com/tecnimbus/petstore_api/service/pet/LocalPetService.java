@@ -61,4 +61,9 @@ public class LocalPetService implements PetServiceStrategy {
         petDTOResponse.setTags(savedTags);
         return petDTOResponse;
     }
+
+    @Override
+    public void deleteAnExistingPet(Long petId) {
+
+    }
 }

@@ -6,4 +6,5 @@ public interface PetServiceStrategy {
     PetDTO addNewPetToTheStore(PetDTO petDTO);
     PetDTO findPetById(Long petId);
     PetDTO updateAnExistingPet(PetDTO petDTO);
+    void deleteAnExistingPet(Long petId);
 }
