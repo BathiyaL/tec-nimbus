@@ -2,6 +2,7 @@ package com.tecnimbus.petstore_api.service.external;
 
 import com.tecnimbus.petstore_api.constants.ExternalEndpoints;
 import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
+import com.tecnimbus.petstore_api.model.ApiResponse;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,25 @@ public class PetStoreExternalService extends BaseService {
         return response.getBody();
     }
 
+    public ApiResponse deleteAnExistingPet(Long petId){
+        String remoteUrl = remotePetStore + "/pet/" + petId;
+
+        HttpEntity<Void> entity = new HttpEntity<>(getHeaders());
+
+        try {
+            ResponseEntity<ApiResponse> response = restTemplate.exchange(
+                    remoteUrl,
+                    HttpMethod.DELETE,
+                    entity,
+                    ApiResponse.class
+            );
+            return response.getBody();
+        } catch (HttpClientErrorException.NotFound ex) {
+            throw new ResourceNotFoundException("Pet not found in external API with id: " + petId);
+        } catch (HttpClientErrorException ex) {
+            throw new RuntimeException("Client error: " + ex.getMessage());
+        } catch (HttpServerErrorException ex) {
+            throw new RuntimeException("Server error: " + ex.getMessage());
+        }
+    }
 }

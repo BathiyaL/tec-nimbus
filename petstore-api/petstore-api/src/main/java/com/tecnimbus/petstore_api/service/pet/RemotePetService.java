@@ -1,6 +1,7 @@
 package com.tecnimbus.petstore_api.service.pet;
 
 import com.tecnimbus.petstore_api.mapper.PetMapper;
+import com.tecnimbus.petstore_api.model.ApiResponse;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.service.external.PetStoreExternalService;
 import com.tecnimbus.petstore_api.service.tag.TagService;
@@ -35,7 +36,7 @@ public class RemotePetService implements PetServiceStrategy {
     }
 
     @Override
-    public void deleteAnExistingPet(Long petId) {
-
+    public ApiResponse deleteAnExistingPet(Long petId) {
+        return petStoreExternalService.deleteAnExistingPet(petId);
     }
 }

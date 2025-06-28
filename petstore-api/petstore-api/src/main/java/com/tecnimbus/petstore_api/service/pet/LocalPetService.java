@@ -3,6 +3,7 @@ package com.tecnimbus.petstore_api.service.pet;
 import com.tecnimbus.petstore_api.entity.Pet;
 import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
 import com.tecnimbus.petstore_api.mapper.PetMapper;
+import com.tecnimbus.petstore_api.model.ApiResponse;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.model.TagDTO;
 import com.tecnimbus.petstore_api.repository.pet.PetRepository;
@@ -63,7 +64,17 @@ public class LocalPetService implements PetServiceStrategy {
     }
 
     @Override
-    public void deleteAnExistingPet(Long petId) {
+    public ApiResponse deleteAnExistingPet(Long petId) {
 
+        Pet pet = petRepository.findById(petId)
+                .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + petId));
+
+        petRepository.delete(pet);
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setCode(200);
+        apiResponse.setType("unknown");
+        apiResponse.setMessage(petId.toString());
+
+        return apiResponse;
     }
 }

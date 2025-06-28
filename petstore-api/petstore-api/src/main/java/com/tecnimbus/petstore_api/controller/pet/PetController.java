@@ -41,8 +41,8 @@ public class PetController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/pet/{petId}")
-    public void deletePet(@PathVariable Long petId) {
-        petServiceRouter.deleteAnExistingPet(petId);
-        //return ResponseEntity.ok(saved);
+    public ResponseEntity<com.tecnimbus.petstore_api.model.ApiResponse> deletePet(@PathVariable Long petId) {
+        com.tecnimbus.petstore_api.model.ApiResponse apiResponse = petServiceRouter.deleteAnExistingPet(petId);
+        return ResponseEntity.ok(apiResponse);
     }
 }

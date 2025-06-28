@@ -2,6 +2,7 @@ package com.tecnimbus.petstore_api.service.pet;
 
 import com.tecnimbus.petstore_api.config.AppConfig;
 import com.tecnimbus.petstore_api.constants.OperationMode;
+import com.tecnimbus.petstore_api.model.ApiResponse;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,11 +44,11 @@ public class PetServiceRouter extends BaseService {
         }
     }
 
-    public void deleteAnExistingPet(Long petId) {
+    public ApiResponse deleteAnExistingPet(Long petId) {
         if (appConfig.getDataMode() == OperationMode.LOCAL) {
-            localPetService.deleteAnExistingPet(petId);
+            return localPetService.deleteAnExistingPet(petId);
         } else {
-            remotePetService.deleteAnExistingPet(petId);
+            return remotePetService.deleteAnExistingPet(petId);
         }
     }
 }
