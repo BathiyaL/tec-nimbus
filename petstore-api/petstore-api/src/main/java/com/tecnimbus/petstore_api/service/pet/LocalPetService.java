@@ -7,10 +7,12 @@ import com.tecnimbus.petstore_api.model.ApiResponse;
 import com.tecnimbus.petstore_api.model.PetDTO;
 import com.tecnimbus.petstore_api.model.TagDTO;
 import com.tecnimbus.petstore_api.repository.pet.PetRepository;
+import com.tecnimbus.petstore_api.repository.pettag.PetTagsRepository;
 import com.tecnimbus.petstore_api.service.pettag.PetTagService;
 import com.tecnimbus.petstore_api.service.tag.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +25,9 @@ public class LocalPetService implements PetServiceStrategy {
     TagService tagService;
     @Autowired
     PetRepository petRepository;
+
+    @Autowired
+    PetTagsRepository petTagsRepository;
 
     @Autowired
     PetTagService petTagService;
@@ -64,11 +69,12 @@ public class LocalPetService implements PetServiceStrategy {
     }
 
     @Override
+    @Transactional
     public ApiResponse deleteAnExistingPet(Long petId) {
 
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new ResourceNotFoundException("Pet not found with id: " + petId));
-
+        petTagsRepository.deleteByPet(pet);
         petRepository.delete(pet);
         ApiResponse apiResponse = new ApiResponse();
         apiResponse.setCode(200);

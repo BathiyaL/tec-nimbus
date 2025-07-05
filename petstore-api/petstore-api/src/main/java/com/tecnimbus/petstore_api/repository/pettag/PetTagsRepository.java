@@ -12,4 +12,5 @@ public interface PetTagsRepository extends JpaRepository<PetTags, Long> {
     List<PetTags> findByPet(Pet pet);
     List<PetTags> findByTag(Tag tag);
     Optional<PetTags> findByPetAndTag(Pet pet, Tag tag);
+    void deleteByPet(Pet pet);
 }
