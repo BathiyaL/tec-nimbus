@@ -1,13 +1,11 @@
 import { test, expect, request } from '@playwright/test';
 
-test('GET post by ID', async ({ request }) => {
-  const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
+test('GET pet by ID', async ({ request }) => {
+  const response = await request.get('https://petstore.swagger.io/v2/pet/10');
 
   expect(response.status()).toBe(200);
   const data = await response.json();
-
-//   expect(data).toHaveProperty('id', 1);
-//   expect(data.title).toBeDefined();
-console.log(data);
-  console.log("TEST PASSED with status code : " + response.status());
+  console.log(data);
+  expect(data).toHaveProperty('id', 10);
+  expect(data.name).toBeDefined();
 });
