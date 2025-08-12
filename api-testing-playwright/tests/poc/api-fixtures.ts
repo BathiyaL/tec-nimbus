@@ -9,7 +9,6 @@ export const test = base.extend<Fixtures>({
     const apiContext = await request.newContext({
       baseURL: 'https://petstore.swagger.io',
       extraHTTPHeaders: {
-        // Example header; update with your real token if needed
         Authorization: 'Bearer dummy-token',
         Accept: 'application/json'
       }
