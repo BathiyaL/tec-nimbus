@@ -22,7 +22,7 @@ public class PetController extends BaseController {
     @Autowired
     PetServiceRouter petServiceRouter;
 
-    @Operation(summary = "Find pet by ID", description = "Returns a single pet")
+    @Operation(summary = "Find pet by ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Pet found"),
             @ApiResponse(responseCode = "404", description = "Pet not found")
@@ -39,12 +39,14 @@ public class PetController extends BaseController {
         return ResponseEntity.ok(saved);
     }
 
+    @Operation(summary = "Update an existing pet")
     @RequestMapping(method = RequestMethod.PUT, value = "/pet")
     public ResponseEntity<PetDTO> updatePet(@Valid @RequestBody PetDTO petDTO) {
         PetDTO saved = petServiceRouter.updateAnExistingPet(petDTO);
         return ResponseEntity.ok(saved);
     }
 
+    @Operation(summary = "Deletes a pet")
     @RequestMapping(method = RequestMethod.DELETE, value = "/pet/{petId}")
     public ResponseEntity<com.tecnimbus.petstore_api.model.ApiResponse> deletePet(@PathVariable Long petId) {
         com.tecnimbus.petstore_api.model.ApiResponse apiResponse = petServiceRouter.deleteAnExistingPet(petId);
