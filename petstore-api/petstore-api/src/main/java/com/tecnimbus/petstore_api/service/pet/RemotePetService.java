@@ -15,8 +15,6 @@ public class RemotePetService implements PetServiceStrategy {
     PetMapper petMapper;
     @Autowired
     TagService tagService;
-
-
     @Autowired
     PetStoreExternalService petStoreExternalService;
 

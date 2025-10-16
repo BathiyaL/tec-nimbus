@@ -1,6 +1,7 @@
 package com.tecnimbus.petstore_api.controller.store;
 
 import com.tecnimbus.petstore_api.controller.BaseController;
+import com.tecnimbus.petstore_api.model.external.ExternalInventoryDTO;
 import com.tecnimbus.petstore_api.service.store.StoreServiceRouter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,7 +23,7 @@ public class StoreController extends BaseController {
             @ApiResponse(responseCode = "200", description = "Returns pet inventories by status")
     })
     @RequestMapping(method = RequestMethod.GET, value = "/store/inventory", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getPetInventory() {
+    public ExternalInventoryDTO getPetInventory() {
         return storeServiceRouter.getPetInventory();
     }
 }

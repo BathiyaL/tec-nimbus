@@ -4,6 +4,7 @@ import com.tecnimbus.petstore_api.constants.ExternalEndpoints;
 import com.tecnimbus.petstore_api.exception.ResourceNotFoundException;
 import com.tecnimbus.petstore_api.model.ApiResponse;
 import com.tecnimbus.petstore_api.model.PetDTO;
+import com.tecnimbus.petstore_api.model.external.ExternalInventoryDTO;
 import com.tecnimbus.petstore_api.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -88,5 +89,21 @@ public class PetStoreExternalService extends BaseService {
         } catch (HttpServerErrorException ex) {
             throw new RuntimeException("Server error: " + ex.getMessage());
         }
+    }
+
+    public ExternalInventoryDTO getPetInventory() {
+        String remoteUrl = remotePetStore + ExternalEndpoints.STORE_INVENTORY;
+        HttpEntity<Void> entity = new HttpEntity<>(getHeaders());
+
+        try {
+            ResponseEntity<ExternalInventoryDTO> response = restTemplate.exchange(
+                    remoteUrl, HttpMethod.GET, entity, ExternalInventoryDTO.class);
+            return response.getBody();
+        } catch (HttpClientErrorException ex) {
+            throw new RuntimeException("Client error: " + ex.getMessage());
+        } catch (HttpServerErrorException ex) {
+            throw new RuntimeException("Server error: " + ex.getMessage());
+        }
+
     }
 }
