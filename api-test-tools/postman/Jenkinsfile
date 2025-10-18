@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    environment {
+        COLLECTION = "PetStoreDemo.json"
+        REPORT_HTML = "newman-report.html"
+    }
+
+    stages {
+        stage('Verify Node.js Installation') {
+            steps {
+                echo 'Checking Node.js and npm availability...'
+                sh '''
+                node -v || { echo "Node.js is not installed!"; exit 1; }
+                npm -v || { echo "npm is not installed!"; exit 1; }
+                '''
+            }
+        }
+
+        stage('Install Newman') {
+            steps {
+                echo 'Installing Newman and HTML reporter...'
+                sh 'npm install -g newman newman-reporter-htmlextra'
+            }
+        }
+
+        stage('Run Postman Tests') {
+            steps {
+                echo "Running Postman tests from ${env.COLLECTION}..."
+                sh '''newman run ${env.COLLECTION}                 --reporters cli,htmlextra                 --reporter-htmlextra-export ${env.REPORT_HTML}'''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ All tests executed successfully!"
+        }
+        failure {
+            echo "❌ Some tests failed. Check the report for details."
+        }
+        always {
+            echo 'Archiving HTML report...'
+            archiveArtifacts artifacts: "${env.REPORT_HTML}", allowEmptyArchive: true
+        }
+    }
+}
