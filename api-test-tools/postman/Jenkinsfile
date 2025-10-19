@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         COLLECTION = "api-test-tools/postman/PetStoreDemo.json"
-        REPORT_HTML = "newman-report.html"
+        REPORT_DIR = "reports/newman-${BUILD_NUMBER}"
+        REPORT_HTML = "index.html"
     }
 
     stages {
@@ -28,7 +29,7 @@ pipeline {
             steps {
                 echo "Running Postman tests from ${env.COLLECTION}..."
                 sh """
-                    mkdir -p reports/newman
+                    mkdir -p ${REPORT_DIR}
                     newman run "${COLLECTION}" \
                     --reporters cli,htmlextra \
                     --reporter-htmlextra-export "${REPORT_HTML}"
@@ -50,8 +51,8 @@ pipeline {
 
             // Publish the HTML report so it’s clickable in the Jenkins UI
             publishHTML(target: [
-                reportDir: 'reports/newman',                 // Report is in workspace root
-                reportFiles: 'index.html',      ,  // Report file
+                reportDir: "${REPORT_DIR}",                 // Report is in workspace root
+                reportFiles: "${REPORT_HTML}" ,      ,  // Report file
                 reportName: "Newman Test Report",
                 keepAll: true,
                 allowMissing: false,
