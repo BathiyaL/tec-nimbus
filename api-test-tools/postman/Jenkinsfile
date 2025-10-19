@@ -46,6 +46,16 @@ pipeline {
         always {
             echo 'Archiving HTML report...'
             archiveArtifacts artifacts: "${env.REPORT_HTML}", allowEmptyArchive: true
+
+            // Publish the HTML report so it’s clickable in the Jenkins UI
+            publishHTML(target: [
+                reportDir: '.',                 // Report is in workspace root
+                reportFiles: "${env.REPORT_HTML}",  // Report file
+                reportName: "Newman Test Report",
+                keepAll: true,
+                allowMissing: false,
+                alwaysLinkToLastBuild: true
+            ])
         }
     }
 }
