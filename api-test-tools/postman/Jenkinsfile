@@ -27,6 +27,7 @@ pipeline {
         stage('Run Postman Tests') {
             steps {
                 echo "Running Postman tests from ${env.COLLECTION}..."
+                mkdir -p reports/newman
                 sh """
                     newman run "${COLLECTION}" \
                     --reporters cli,htmlextra \
