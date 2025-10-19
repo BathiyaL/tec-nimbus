@@ -29,6 +29,7 @@ pipeline {
             steps {
                 echo "Running Postman tests from ${env.COLLECTION}..."
                 sh """
+                    rm -rf ${REPORT_DIR}       # Clean any leftover folder
                     mkdir -p ${REPORT_DIR}
                     newman run "${COLLECTION}" \
                     --reporters cli,htmlextra \
