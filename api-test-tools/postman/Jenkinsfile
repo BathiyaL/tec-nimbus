@@ -52,7 +52,7 @@ pipeline {
 
             // Publish the HTML report so it’s clickable in the Jenkins UI
             publishHTML(target: [
-                reportDir: "${REPORT_DIR}",                 // Report is in workspace root
+                reportDir: "",                 // Report is in workspace root
                 reportFiles: "${REPORT_HTML}" ,      ,  // Report file
                 reportName: "Newman_Test_Report",
                 keepAll: true,
