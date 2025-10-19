@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        COLLECTION = "PetStoreDemo.json"
+        COLLECTION = "api-test-tools/postman/PetStoreDemo.json"
         REPORT_HTML = "newman-report.html"
     }
 
@@ -27,11 +27,7 @@ pipeline {
         stage('Run Postman Tests') {
             steps {
                 echo "Running Postman tests from ${env.COLLECTION}..."
-                sh """
-                    newman run "${COLLECTION}" \
-                        --reporters cli,htmlextra \
-                        --reporter-htmlextra-export "${REPORT_HTML}"
-                """
+                sh '''newman run ${env.COLLECTION}                 --reporters cli,htmlextra                 --reporter-htmlextra-export ${env.REPORT_HTML}'''
             }
         }
     }
