@@ -53,7 +53,7 @@ pipeline {
             publishHTML(target: [
                 reportDir: "${REPORT_DIR}",                 // Report is in workspace root
                 reportFiles: "${REPORT_HTML}" ,      ,  // Report file
-                reportName: "Newman Test Report",
+                reportName: "Newman_Test_Report",
                 keepAll: true,
                 allowMissing: false,
                 alwaysLinkToLastBuild: true
