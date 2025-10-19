@@ -27,7 +27,11 @@ pipeline {
         stage('Run Postman Tests') {
             steps {
                 echo "Running Postman tests from ${env.COLLECTION}..."
-                sh '''newman run ${env.COLLECTION}                 --reporters cli,htmlextra                 --reporter-htmlextra-export ${env.REPORT_HTML}'''
+                sh """
+                    newman run "${COLLECTION}" \
+                    --reporters cli,htmlextra \
+                    --reporter-htmlextra-export "${REPORT_HTML}"
+                    """
             }
         }
     }
