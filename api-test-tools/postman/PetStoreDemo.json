@@ -1,196 +1,152 @@
 {
 	"info": {
-		"_postman_id": "efa0effa-4868-4bfd-bcf1-7cc3bdefada4",
+		"_postman_id": "4b088974-933f-4dc7-add8-1e6508327f50",
 		"name": "Pet Store API",
 		"description": "API for managing pets\n\nContact Support:\n Name: Your Name\n Email: you@example.com",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "6174302"
+		"_exporter_id": "49402004",
+		"_collection_link": "https://bladduwahetty-4447852.postman.co/workspace/Don's-Workspace~d2700684-f926-4513-8140-9544b66bf512/collection/49402004-4b088974-933f-4dc7-add8-1e6508327f50?action=share&source=collection_link&creator=49402004"
 	},
 	"item": [
 		{
 			"name": "pet",
 			"item": [
 				{
-					"name": "{petId}",
-					"item": [
+					"name": "Add a new pet to the store",
+					"event": [
 						{
-							"name": "Find pet by ID",
-							"request": {
-								"method": "GET",
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check if ID exists in response",
+									"pm.test(\"Pet ID is present\", function () {",
+									"    pm.expect(response.id).to.exist;",
+									"});",
+									"",
+									"// Save petId for next requests",
+									"pm.environment.set(\"petId\", response.id);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 4677,\n  \"name\": \"Rowa\",\n  \"status\": \"New\",\n  \"photoUrls\": [\n    \"Photo1\",\n    \"Photo1\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"ABC\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"PET\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"STORE\",\n      \"id\": 7063\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pet",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
 								"header": [
 									{
-										"key": "Accept",
+										"key": "Content-Type",
 										"value": "application/json"
-									}
-								],
-								"url": {
-									"raw": "{{baseUrl}}/pet/:petId",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"pet",
-										":petId"
-									],
-									"variable": [
-										{
-											"key": "petId",
-											"value": "5744"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Pet found",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json"
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/pet/:petId",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"pet",
-												":petId"
-											],
-											"variable": [
-												{
-													"key": "petId"
-												}
-											]
-										}
 									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}"
-								},
-								{
-									"name": "Pet not found",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json"
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/pet/:petId",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"pet",
-												":petId"
-											],
-											"variable": [
-												{
-													"key": "petId"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}"
-								}
-							]
-						},
-						{
-							"name": "Deletes a pet",
-							"request": {
-								"method": "DELETE",
-								"header": [
 									{
 										"key": "Accept",
 										"value": "*/*"
 									}
 								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "{{baseUrl}}/pet/:petId",
+									"raw": "{{baseUrl}}/pet",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"pet",
-										":petId"
-									],
-									"variable": [
-										{
-											"key": "petId",
-											"value": "5744"
-										}
+										"pet"
 									]
 								}
 							},
-							"response": [
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
 								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "DELETE",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "*/*"
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/pet/:petId",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"pet",
-												":petId"
-											],
-											"variable": [
-												{
-													"key": "petId"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "*/*"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"code\": 9123,\n  \"type\": \"string\",\n  \"message\": \"string\"\n}"
+									"key": "Content-Type",
+									"value": "*/*"
 								}
-							]
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}"
 						}
 					]
 				},
 				{
 					"name": "Update an existing pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"// Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"// Check if pet name updated",
+									"pm.test(\"Pet name is updated\", function () {",
+									"    pm.expect(response.name).to.eql(\"Rower\");",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -205,7 +161,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}",
+							"raw": "{\n  \"id\": {{petId}},\n  \"name\": \"Rower\",\n  \"status\": \"OLD\",\n  \"photoUrls\": [\n    \"Photo1\",\n    \"Photo1\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"ABC\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"PET\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"STORE\",\n      \"id\": 7063\n    }\n  ]\n}",
 							"options": {
 								"raw": {
 									"headerFamily": "json",
@@ -273,164 +229,149 @@
 					]
 				},
 				{
-					"name": "Add a new pet to the store",
+					"name": "Find pet by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"//Check pet ID matches",
+									"pm.test(\"Pet ID matches expected\", function () {",
+									"    pm.expect(response.id).to.eql(Number(pm.environment.get(\"petId\")));",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
 								"key": "Accept",
-								"value": "*/*"
+								"value": "application/json"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}",
-							"options": {
-								"raw": {
-									"headerFamily": "json",
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{baseUrl}}/pet",
+							"raw": "{{baseUrl}}/pet/{{petId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"pet"
+								"pet",
+								"{{petId}}"
 							]
 						}
 					},
 					"response": [
 						{
-							"name": "OK",
+							"name": "Pet found",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [
 									{
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
 										"key": "Accept",
-										"value": "*/*"
+										"value": "application/json"
 									}
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}",
-									"options": {
-										"raw": {
-											"headerFamily": "json",
-											"language": "json"
-										}
-									}
-								},
 								"url": {
-									"raw": "{{baseUrl}}/pet",
+									"raw": "{{baseUrl}}/pet/:petId",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"pet"
+										"pet",
+										":petId"
+									],
+									"variable": [
+										{
+											"key": "petId"
+										}
 									]
 								}
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": "text",
+							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "*/*"
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}"
+						},
+						{
+							"name": "Pet not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/pet/:petId",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"pet",
+										":petId"
+									],
+									"variable": [
+										{
+											"key": "petId"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
 								}
 							],
 							"cookie": [],
 							"body": "{\n  \"id\": 4677,\n  \"name\": \"string\",\n  \"status\": \"string\",\n  \"photoUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"category\": {\n    \"id\": 9342,\n    \"name\": \"string\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"string\",\n      \"id\": 2875\n    },\n    {\n      \"name\": \"string\",\n      \"id\": 7063\n    }\n  ]\n}"
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "store",
-			"item": [
+				},
 				{
-					"name": "inventory",
-					"item": [
+					"name": "Deletes a pet",
+					"event": [
 						{
-							"name": "Find pet by ID",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/json"
-									}
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Check status code",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
 								],
-								"url": {
-									"raw": "{{baseUrl}}/store/inventory",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"store",
-										"inventory"
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Returns pet inventories by status",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"key": "Accept",
-												"value": "application/json"
-											}
-										],
-										"url": {
-											"raw": "{{baseUrl}}/store/inventory",
-											"host": [
-												"{{baseUrl}}"
-											],
-											"path": [
-												"store",
-												"inventory"
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "json",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n  \"sold\": 9993,\n  \"newCount\": 1938,\n  \"solid\": 3756,\n  \"teststa5\": 8737,\n  \"string\": 7056,\n  \"pending\": 1133,\n  \"available\": 4153,\n  \"peric\": 4287,\n  \"avaible\": 6446,\n  \"unavailable\": 4100,\n  \"flying\": 8501,\n  \"added\": 8636\n}"
-								}
-							]
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
 						}
-					]
-				}
-			]
-		},
-		{
-			"name": "health",
-			"item": [
-				{
-					"name": "health Check",
+					],
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Accept",
@@ -438,12 +379,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/health",
+							"raw": "{{baseUrl}}/pet/{{petId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"health"
+								"pet",
+								"{{petId}}"
 							]
 						}
 					},
@@ -451,7 +393,7 @@
 						{
 							"name": "OK",
 							"originalRequest": {
-								"method": "GET",
+								"method": "DELETE",
 								"header": [
 									{
 										"key": "Accept",
@@ -459,12 +401,18 @@
 									}
 								],
 								"url": {
-									"raw": "{{baseUrl}}/health",
+									"raw": "{{baseUrl}}/pet/:petId",
 									"host": [
 										"{{baseUrl}}"
 									],
 									"path": [
-										"health"
+										"pet",
+										":petId"
+									],
+									"variable": [
+										{
+											"key": "petId"
+										}
 									]
 								}
 							},
@@ -478,9 +426,45 @@
 								}
 							],
 							"cookie": [],
-							"body": "string"
+							"body": "{\n  \"code\": 9123,\n  \"type\": \"string\",\n  \"message\": \"string\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Pet Not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"//Check status code",
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pet/{{petId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pet",
+								"{{petId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
