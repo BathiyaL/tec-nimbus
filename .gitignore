@@ -25,3 +25,41 @@ gradle-app.setting
 .gradle
 build/
 
+# Maven target directory
+/target/
+
+# IntelliJ IDEA project files
+/.idea/
+/*.iml
+
+# Eclipse project files
+/.classpath
+/.project
+/.settings/
+
+# VS Code settings
+/.vscode/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+
+# Maven-specific files
+*maven-wrapper.jar
+*maven-wrapper.properties
+!/.mvn/wrapper/maven-wrapper.jar
+*mvnw
+*mvnw.cmd
+
+# Spring Boot devtools
+.spring-boot-devtools.properties
+
+# Build output
+/build/
