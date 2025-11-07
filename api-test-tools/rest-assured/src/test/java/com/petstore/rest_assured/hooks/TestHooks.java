@@ -12,11 +12,11 @@ public class TestHooks {
         this.context = context;
     }
 
-    @Before
-    public void beforeScenario() {
-        // clear state before each scenario if needed
-        // (context is a new instance per scenario by default)
-    }
+//    @Before
+//    public void beforeScenario() {
+//        context.getInstance().set("startTime", System.currentTimeMillis());
+//        System.out.println("Starting a new scenario...");
+//    }
 
     @After
     public void afterScenario() {
@@ -25,5 +25,6 @@ public class TestHooks {
         if (petId != null) {
             // call delete endpoint via Rest Assured (optional)
         }
+        System.out.println("Scenario finished.");
     }
 }
