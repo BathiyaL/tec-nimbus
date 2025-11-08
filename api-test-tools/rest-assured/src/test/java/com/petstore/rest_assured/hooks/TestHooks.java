@@ -12,11 +12,11 @@ public class TestHooks {
         this.context = context;
     }
 
-//    @Before
-//    public void beforeScenario() {
+    @Before
+    public void beforeScenario() {
 //        context.getInstance().set("startTime", System.currentTimeMillis());
-//        System.out.println("Starting a new scenario...");
-//    }
+        System.out.println("Starting a new scenario...");
+    }
 
     @After
     public void afterScenario() {
