@@ -14,7 +14,7 @@ public class TestHooks {
 
     @Before
     public void beforeScenario() {
-//        context.getInstance().set("startTime", System.currentTimeMillis());
+//        context.clear();
         System.out.println("Starting a new scenario...");
     }
 

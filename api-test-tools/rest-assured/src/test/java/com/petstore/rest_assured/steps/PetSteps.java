@@ -26,11 +26,29 @@ public class PetSteps {
     public void createNewPet(String name, String status) {
         String body = String.format(
                 """
-                {
-                  "id": 0,
-                  "name": "%s",
-                  "status": "%s"
-                }
+                    {
+                              "id": 4677,
+                              "name": "%s",
+                              "status": "%s",
+                              "photoUrls": [
+                                "Photo1",
+                                "Photo1"
+                              ],
+                              "category": {
+                                "id": 9342,
+                                "name": "ABC"
+                              },
+                              "tags": [
+                                {
+                                  "name": "PET",
+                                  "id": 2875
+                                },
+                                {
+                                  "name": "STORE",
+                                  "id": 7063
+                                }
+                              ]
+                            }
                 """, name, status);
 
         lastResponse = given()
@@ -50,11 +68,14 @@ public class PetSteps {
     @Then("I save the returned pet id as {string}")
     public void savePetId(String varName) {
         Long id = lastResponse.jsonPath().getLong("id");
+        System.out.println("Storing pet id: " + id);
         context.set(varName, id);
+        assertThat(context.get("petId"), is(notNullValue()));
     }
 
     @Given("I have a stored {string}")
     public void haveStoredId(String varName) {
+        System.out.println("Storing pet id#########: " + context.get(varName));
         // ensure exists
         assertThat(context.get(varName), is(notNullValue()));
     }
@@ -64,9 +85,27 @@ public class PetSteps {
         Long petId = context.getLong("petId");
         String body = String.format("""
             {
-              "id": %d,
-              "name": "%s",
-              "status": "%s"
+                      "id": %d,
+                      "name": "%s",
+                      "status": "%s,
+                      "photoUrls": [
+                        "Photo1",
+                        "Photo1"
+                      ],
+                      "category": {
+                        "id": 9342,
+                        "name": "ABC"
+                      },
+                      "tags": [
+                        {
+                          "name": "PET",
+                          "id": 2875
+                        },
+                        {
+                          "name": "STORE",
+                          "id": 7063
+                        }
+                      ]
             }
             """, petId, name, status);
 

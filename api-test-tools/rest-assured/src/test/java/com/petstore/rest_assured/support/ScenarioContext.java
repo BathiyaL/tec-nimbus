@@ -9,4 +9,5 @@ public class ScenarioContext {
     public void set(String key, Object value) { data.put(key, value); }
     public Object get(String key) { return data.get(key); }
     public Long getLong(String key) { Object v = data.get(key); return v == null ? null : Long.valueOf(v.toString()); }
+
 }

@@ -6,7 +6,11 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = {"com.petstore.rest_assured.steps", "com.petstore.rest_assured.support"},
+        glue = {
+                "com.petstore.rest_assured.steps",
+                "com.petstore.rest_assured.hooks",
+                "com.petstore.rest_assured.support"
+        },
         plugin = {"pretty", "html:target/cucumber-report.html"},
         monochrome = true
 )
