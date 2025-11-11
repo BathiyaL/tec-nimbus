@@ -116,6 +116,8 @@ public class PetSteps {
                 .put("/pet")
                 .then()
                 .extract().response();
+
+        System.out.println(lastResponse.asString());
     }
 
     @Then("the response body name should be {string}")

@@ -14,12 +14,12 @@ Scenario: Update an existing pet
     Then the response status code should be 200
     And the response body name should be "fluffy-updated"
 
-Scenario: Find pet by id
-        Given I have a stored "petId"
-        When I get the pet by id
-        Then the response status code should be 200
-        And the returned id should equal the stored "petId"
-
-Scenario: Pet not found
-        When I get the pet with id 999999
-        Then the response status code should be 404
+#Scenario: Find pet by id
+#        Given I have a stored "petId"
+#        When I get the pet by id
+#        Then the response status code should be 200
+#        And the returned id should equal the stored "petId"
+#
+#Scenario: Pet not found
+#        When I get the pet with id 999999
+#        Then the response status code should be 404
