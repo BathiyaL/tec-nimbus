@@ -14,17 +14,11 @@ public class TestHooks {
 
     @Before
     public void beforeScenario() {
-//        context.clear();
         System.out.println("Starting a new scenario...");
     }
 
     @After
     public void afterScenario() {
-        // optional cleanup: if a petId exists, delete it
-        Long petId = context.getLong("petId");
-        if (petId != null) {
-            // call delete endpoint via Rest Assured (optional)
-        }
         System.out.println("Scenario finished.");
     }
 }
