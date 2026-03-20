@@ -1,0 +1,13 @@
+{
+  "name": "playwright-api-framework",
+  "version": "1.0.0",
+  "description": "Playwright API Test Framework",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.0"
+  }
+}
