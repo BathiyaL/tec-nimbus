@@ -1,5 +1,7 @@
 import dev from './config/dev.env.js';
 
+console.log('Base URL:', dev.baseURL);
+
 export default {
   testDir: './tests',
   timeout: 30000,

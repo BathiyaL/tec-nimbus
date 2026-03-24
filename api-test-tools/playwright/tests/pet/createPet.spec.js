@@ -13,3 +13,14 @@ test('@smoke Create a pet', async ({ request }) => {
   console.log('Create Pet Response:', response.json());
   expect(response.status()).toBe(200);
 });
+
+// test('debug URL', async ({ request }) => {
+//   const response = await request.post('/pet', {
+//     data: { id: 1, name: 'test', status: 'available' }
+//   });
+
+//   console.log('response.url():', response.url());
+
+//   const body = await response.json();
+//   console.log('response body:', body);
+// });

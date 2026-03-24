@@ -1,3 +1,4 @@
 export default {
-  baseURL: 'https://petstore.swagger.io/v2'
+  name: 'dev',
+  baseURL: https://petstore.swagger.io/v2'
 };

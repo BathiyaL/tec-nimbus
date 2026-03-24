@@ -2,6 +2,8 @@ import { ENDPOINTS } from '../constants/endpoints.js';
 
 export class PetAPI {
   constructor(request) {
+    console.log('API Client initialized with base URL:', request.baseURL);
+    console.log('Base URL:', this.request._options?.baseURL);
     this.request = request;
   }
 
