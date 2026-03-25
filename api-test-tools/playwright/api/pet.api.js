@@ -1,14 +1,17 @@
 import { ENDPOINTS } from '../constants/endpoints.js';
 
 export class PetAPI {
-  constructor(request) {
-    console.log('API Client initialized with base URL:', request.baseURL);
-    console.log('Base URL:', this.request._options?.baseURL);
+  constructor(request, baseURL) {
     this.request = request;
+    this.baseURL = baseURL;
   }
 
   async createPet(payload) {
-    return await this.request.post(ENDPOINTS.PET, { data: payload });
+    console.log(`#####################`);
+    console.log(`POST ${this.baseURL}${ENDPOINTS.PET}`);
+    return await this.request.post(`${this.baseURL}${ENDPOINTS.PET}`, {
+      data: payload
+    });
   }
 
   async getPetById(id) {
