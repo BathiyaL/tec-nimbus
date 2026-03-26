@@ -1,16 +1,23 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from '../../fixtures/apiClient.js';
 import { PetAPI } from '../../api/pet.api.js';
 import { createPetPayload } from '../../utils/dataGenerator.js';
-import dev from '../../config/dev.env.js';
+import env from '../../config/envManager.js';
 
 test('@smoke Create a pet', async ({ request }) => {
-  const petApi = new PetAPI(request, dev.baseURL);
+  const petApi = new PetAPI(request, env.baseURL);
   const payload = createPetPayload();
-  // console.log('Request URL:', 'https://petstore.swagger.io/v2/pet');
-  console.log('Request Payload:', JSON.stringify(payload, null, 2));
   const response = await petApi.createPet(payload);
-  //console.log('Request URL:', response.url());
-
-  console.log('Create Pet Response:', response.json());
   expect(response.status()).toBe(200);
+});
+
+test('@smoke Create a pet via apiClient fixture', async ({ apiClient }) => {
+  const petApi = new PetAPI(apiClient);
+  const payload = createPetPayload();
+
+  const response = await petApi.createPet(payload);
+
+  expect(response.status()).toBe(200);
+  const body = await response.json();
+  expect(body.name).toBe(payload.name);
 });
