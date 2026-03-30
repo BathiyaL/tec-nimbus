@@ -1,3 +1,3 @@
 export const ENDPOINTS = {
-  PET: '/pet'
+  PET: '/v2/pet'
 };
