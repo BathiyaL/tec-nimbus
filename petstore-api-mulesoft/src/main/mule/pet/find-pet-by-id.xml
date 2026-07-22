@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ea412680-61ae-4d4d-9109-736620fd4328" basePath="api/v1" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="find-pet-by-idFlow" doc:id="5a528d4b-a684-4fa2-b355-3aef1f99c844" >
+		<http:listener doc:name="FindPetByID" doc:id="e27a80a9-b379-408c-8fbc-a0f80ecd2882" config-ref="HTTP_Listener_config" path="pet/{petId}">
+			<http:response >
+				<http:body ><![CDATA[{"id":5,"category":{"id":0,"name":"string"},"name":"doggie","photoUrls":["string"],"tags":[{"id":0,"name":"string"}],"status":"string"}]]></http:body>
+			</http:response>
+		</http:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="51cb6ebd-aaeb-43e1-8e33-1cbdbf269207" message="This is new pet"/>
+	</flow>
+</mule>
